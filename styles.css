@@ -115,10 +115,10 @@ ul {
 }
 
 .glass-dark {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    background: linear-gradient(135deg, #f8e9ff 0%, #d79bff 100%);
     color: white;
     border-radius: 50px;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     position: relative;
     overflow: hidden;
 }
@@ -805,25 +805,28 @@ ul {
 .cta-content h2 {
     font-size: clamp(2rem, 4vw, 3rem);
     margin-bottom: 1rem;
+    color: #2b2b2b;
 }
 
 .cta-content p {
     font-size: 1.25rem;
     max-width: 600px;
     margin: 0 auto 2rem;
-    opacity: 0.9;
+    color: #6b6b6b;
+    opacity: 1;
 }
 
 .cta-btn {
-    background-color: #25D366;
-    /* WhatsApp Green */
+    background-color: #d988e8;
     color: white;
+    box-shadow: 0 6px 20px rgba(217, 136, 232, 0.3);
 }
 
 .cta-btn:hover {
-    background-color: #128C7E;
-    box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4);
+    background-color: #c86bff;
+    box-shadow: 0 10px 24px rgba(200, 107, 255, 0.4);
     color: white;
+    transform: translateY(-3px);
 }
 
 /* --- Footer --- */
