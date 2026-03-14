@@ -615,9 +615,10 @@ ul {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(4, minmax(200px, 240px));
     gap: 1.5rem;
     margin-top: 4rem;
+    justify-content: center;
 }
 
 .service-card {
@@ -972,6 +973,15 @@ ul {
     .about-images {
         height: 400px;
     }
+
+    .services-grid {
+        grid-template-columns: repeat(2, minmax(200px, 240px));
+        justify-content: center;
+    }
+
+    .cta-container {
+        padding: 3rem 1.5rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1014,6 +1024,112 @@ ul {
 
     .hero-btns .btn {
         width: 100%;
+    }
+
+    .testimonial-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0;
+    }
+
+    .testimonial-card {
+        margin: 0 auto;
+        max-width: 100%;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+        padding: 0;
+    }
+
+    .service-card {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+
+    .cta-container {
+        padding: 2rem 1.25rem;
+        max-width: 100%;
+        border-radius: 30px;
+    }
+
+    .cta {
+        padding: 3rem 0;
+    }
+
+    .cta-content h2 {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+        margin-bottom: 0.75rem;
+    }
+
+    .cta-content p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+        max-width: 100%;
+        padding: 0 0.5rem;
+    }
+
+    .cta-btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    .cta-btn i {
+        font-size: 1.1rem;
+    }
+
+    .section-title {
+        font-size: clamp(1.75rem, 5vw, 2.5rem);
+    }
+
+    .footer-container {
+        gap: 2rem;
+    }
+
+    .footer {
+        padding: 3rem 0 1.5rem;
+    }
+
+    .service-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-image {
+        max-width: 100%;
+    }
+
+    .floating-badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+    }
+
+    .floating-badge i {
+        font-size: 1rem;
+    }
+
+    .about-features li {
+        font-size: 0.95rem;
+    }
+
+    .btn-large {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .btn {
+        font-size: 0.95rem;
+        padding: 0.75rem 1.5rem;
+    }
+
+    .nav-btn {
+        display: none;
     }
 }
 
