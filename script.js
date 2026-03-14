@@ -10,7 +10,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 2. Mobile Menu Toggle
+    // 2. Parallax Effect on Hero
+    const heroSection = document.querySelector('.hero');
+    const heroContent = document.querySelector('.hero-content');
+    const heroImage = document.querySelector('.hero-image');
+
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                const scrolled = window.pageYOffset;
+                const parallaxSpeed = 0.5;
+
+                if (heroSection && scrolled < window.innerHeight) {
+                    if (heroContent) {
+                        heroContent.style.transform = `translateY(${scrolled * parallaxSpeed * 0.3}px)`;
+                        heroContent.style.opacity = Math.max(0.2, 1 - (scrolled / window.innerHeight) * 0.8);
+                    }
+                    if (heroImage) {
+                        const scale = Math.max(0.95, 1 - scrolled / window.innerHeight * 0.05);
+                        heroImage.style.transform = `translateY(${scrolled * parallaxSpeed * 0.5}px) scale(${scale})`;
+                    }
+                }
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+
+    // 3. Mobile Menu Toggle
     const menuToggle = document.getElementById('menu-toggle');
     const navMenu = document.getElementById('nav-menu');
     const icon = menuToggle.querySelector('i');
@@ -38,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. Smooth Scroll and Active State update
+    // 4. Smooth Scroll and Active State update
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-link');
 
@@ -60,41 +89,51 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 4. Scroll Reveal Animations (Basic Intersection Observer)
+    // 5. Enhanced Scroll Reveal Animations
     const observerOptions = {
         root: null,
-        rootMargin: '0px',
-        threshold: 0.1
+        rootMargin: '-50px',
+        threshold: 0.15
     };
 
-    const observer = new IntersectionObserver((entries, observer) => {
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('reveal');
-                observer.unobserve(entry.target);
+                entry.target.classList.add('animate-in');
+                // Don't unobserve to allow re-triggering if needed
             }
         });
     }, observerOptions);
 
-    // Apply reveal class to elements dynamically built via js
-    const animatables = document.querySelectorAll('.service-card, .testimonial-card, .about-content, .about-images');
-    animatables.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1)';
+    // Observe all animated elements
+    const animatedElements = document.querySelectorAll(
+        '.section-header, .about-images, .about-content, .service-card, .testimonial-card, .cta-container'
+    );
 
+    animatedElements.forEach(el => {
         observer.observe(el);
     });
 
-    // Add CSS for the reveal class programmatically
-    const style = document.createElement('style');
-    style.textContent = `
-        .reveal {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-    `;
-    document.head.appendChild(style);
+    // Special handling for service cards - they already have their own animation
+    const serviceCards = document.querySelectorAll('.service-card');
+    serviceCards.forEach((card) => {
+        card.style.animationPlayState = 'paused';
+    });
+
+    // Custom observer for service cards
+    const serviceObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+                entry.target.classList.add('animate-in');
+                serviceObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    serviceCards.forEach(card => {
+        serviceObserver.observe(card);
+    });
     // 5. Testimonial Carousel Logic
     const carousel = document.getElementById('testimonial-carousel');
     const cards = document.querySelectorAll('.testimonial-card');
