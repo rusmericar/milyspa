@@ -1,606 +1,252 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Mily Spa | Eleva tu belleza, y muestra tu mejor versión. </title>
-<!-- Google Fonts: Playfair Display for Serifs, Inter for Body -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<!-- Material Symbols for Icons -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
-<!-- Tailwind CSS v3 -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              charcoal: '#1a1a1a',
-              fucsia: '#B3365B',
-              cream: '#FDF8F5',
-              beige: '#f5f2f0',
-              grey: '#e5e5e5'
-            }
-          },
-          fontFamily: {
-            serif: ['"Playfair Display"', 'serif'],
-            sans: ['"Inter"', 'sans-serif'],
-          },
-          borderRadius: {
-            'huge': '50px',
-          }
-        }
-      }
-    }
-  </script>
-<style data-purpose="custom-typography">
-    h1, h2, h3 { font-family: 'Playfair Display', serif; }
-    body { 
-      font-family: 'Inter', sans-serif; 
-      background: #0A0A0A;
-      color: #FFFFFF; 
-    }
-    
-    .hero-title { 
-      font-size: 5.5rem; 
-      line-height: 1.1; 
-      letter-spacing: 0.5px;
-      color: #FFFFFF;
-      text-shadow: 0 2px 30px rgba(0,0,0,0.4);
-      font-family: 'Playfair Display', serif;
-    }
-    
-    .hero-description { 
-      font-family: 'Inter', sans-serif;
-      font-size: 1.125rem;
-      line-height: 1.8; 
-      opacity: 0.9;
-      max-width: 600px;
-      color: #FFFFFF;
-    }
-    
-    .hero-video-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: 0;
-      -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-      mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-    }
-    
-    .hero-video-background video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: saturate(0.75) brightness(0.9) contrast(1.1);
-    }
-    
-    .hero-video-background::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,1) 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
-    
-    .hero-content {
-      position: relative;
-      z-index: 2;
-    }
-    
-    /* ===== SERVICIOS SECTION ===== */
-    #servicios h2 {
-      margin-bottom: 10px;
-      font-size: 2rem;
-    }
-    
-    #servicios .service-subtitle {
-      font-size: 1.1rem;
-      font-weight: 400;
-      letter-spacing: 4px;
-      line-height: 1.6;
-      text-transform: uppercase;
-      display: block;
-      margin-top: 8px;
-      margin-bottom: 1.5rem;
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-    }
-    
-    #servicios p {
-      line-height: 1.8;
-      color: #BBBBBB;
-    }
-    
-    #servicios ul {
-      margin-top: 1.5rem;
-    }
-    
-    #servicios ul li {
-      font-size: 0.8rem;
-    }
-    
-    #servicios ul li span {
-      opacity: 0.6;
-    }
-    
-    #servicios .service-cta {
-      border-bottom: 3px solid;
-      padding-bottom: 4px;
-    }
-    
-    /* ===== INTRO SECTION ===== */
-    .intro-section {
-      position: relative;
-      background: #252525 !important;
-      animation: luxuryFadeIn 1.8s cubic-bezier(0.33, 1, 0.68, 1);
-    }
-    
-    .intro-section::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(179, 54, 91, 0.12) 0%, transparent 70%);
-      filter: blur(100px);
-      pointer-events: none;
-      z-index: 0;
-    }
-    
-    .intro-section .intro-content {
-      position: relative;
-      z-index: 1;
-    }
-    
-    .intro-title {
-      letter-spacing: 2px;
-      font-weight: 500;
-      animation: luxuryFadeIn 1.8s cubic-bezier(0.33, 1, 0.68, 1);
-    }
-    
-    .intro-subtitle {
-      font-style: italic;
-      color: #a1a1a1 !important;
-      max-width: 400px !important;
-      animation: luxuryFadeIn 1.8s cubic-bezier(0.33, 1, 0.68, 1) 0.2s backwards;
-    }
-    
-    .intro-divider {
-      display: none;
-    }
-    
-    @keyframes sweepDown {
-      from { 
-        height: 0;
-        opacity: 0;
-      }
-      to { 
-        height: 80px;
-        opacity: 1;
-      }
-    }
-    
-    @keyframes luxuryFadeIn {
-      from { 
-        opacity: 0; 
-        transform: translateY(30px); 
-        filter: blur(5px);
-      }
-      to { 
-        opacity: 1; 
-        transform: translateY(0); 
-        filter: blur(0);
-      }
-    }
-    
-    @media (max-width: 768px) {
-      .hero-title { font-size: 3.5rem; }
-      .hero-description { font-size: 1rem; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MilySpa | Tu Refugio de Belleza y Relajación</title>
+    <meta name="description"
+        content="MilySpa es tu centro de tratamientos estéticos, relajación y cuidado personal. Descubre nuestros servicios de masajes, tratamientos faciales y corporales.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="overflow-x-hidden">
-<!-- BEGIN: Navigation -->
-<nav class="fixed top-0 w-full z-50 backdrop-blur-md border-b border-white/10" style="background: rgba(10, 10, 10, 0.6);">
-<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-<div class="text-2xl font-bold tracking-tighter text-white">MILY SPA</div>
-<div class="hidden md:flex space-x-10 text-sm font-medium uppercase tracking-widest text-white">
-<a class="hover:text-brand-fucsia transition-colors" href="#servicios">Servicios</a>
-<a class="hover:text-brand-fucsia transition-colors" href="#best-sellers">Tratamientos</a>
-<a class="hover:text-brand-fucsia transition-colors" href="#contacto">Contacto</a>
-</div>
-<a class="bg-brand-fucsia text-white px-8 py-3 rounded-huge text-sm font-semibold hover:opacity-90 transition-all" href="https://wa.me/your-number">RESERVAR</a>
-</div>
-</nav>
-<!-- END: Navigation -->
-<!-- BEGIN: Hero Section -->
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden" style="background-color: #1a1a1a;">
-<!-- Video de Fondo -->
-<div class="hero-video-background">
-<video autoplay loop muted playsinline>
-<source src="videos/videoH2.mp4" type="video/mp4"/>
-</video>
-</div>
 
-<!-- Contenido Centrado -->
-<div class="hero-content w-full max-w-4xl px-8 text-center" style="margin-top: 40px;">
-<h1 class="hero-title font-medium mb-10">
-        Elevamos tu belleza <span class="italic font-normal"> para que vivas </span> tu mejor versión.
-      </h1>
-<p class="hero-description text-base mx-auto mb-12">
-        En Mily Spa Studio creamos resultados reales y armoniosos mediante tratamientos estéticos especializados y confiables.
-      </p>
-<div class="flex flex-col sm:flex-row gap-4 justify-center">
-<a class="bg-brand-fucsia text-white px-9 py-4 text-sm font-medium tracking-wide hover:opacity-90 transition-all" style="border-radius: 50px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);" href="#servicios">
-          Descubre nuestros servicios
-        </a>
+<body>
+    <header class="header" id="header">
+        <div class="container header-container">
+            <a href="#" class="logo">Mily<span>Spa</span></a>
+            <nav class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+                    <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
+                    <li><a href="#servicios" class="nav-link">Servicios</a></li>
+                    <li><a href="#testimonios" class="nav-link">Testimonios</a></li>
+                </ul>
+                <a href="#contacto" class="btn btn-outline nav-btn">Reserva tu Cita</a>
+            </nav>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
 
-</div>
-</div>
-</section>
-<!-- END: Hero Section -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="inicio">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <span class="subtitle">Bienestar y Estética</span>
+                    <h1 class="title">Descubre tu Belleza Natural y Relájate</h1>
+                    <p class="description">
+                        En Mily Spa Studio creamos resultados reales y armoniosos mediante tratamientos estéticos
+                        especializados y confiables.
+                    </p>
+                    <div class="hero-btns">
+                        <a href="#servicios" class="btn btn-primary">Ver Servicios</a>
+                        <a href="#contacto" class="btn btn-secondary">Agenda una Cita</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="image-wrapper glass">
+                        <!-- High quality image representing the aesthetic -->
+                        <img src="img\descarga (22).jpg" alt="Ambiente MilySpa Tratamiento Relajante">
+                    </div>
+                    <div class="floating-badge badge-1 glass">
+                        <i class="fas fa-star"></i>
+                        <span>5.0 Excelencia</span>
+                    </div>
+                    <div class="floating-badge badge-2 glass">
+                        <i class="fas fa-leaf"></i>
+                        <span>Productos Naturales</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Custom curved separator -->
+            <div class="hero-shape">
+                <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+                    <path fill="#FEFEFE" fill-opacity="1"
+                        d="M0,224L48,213.3C96,203,192,181,288,186.7C384,192,480,224,576,218.7C672,213,768,171,864,144C960,117,1056,107,1152,112C1248,117,1344,139,1392,149.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+                    </path>
+                </svg>
+            </div>
+        </section>
 
-<!-- BEGIN: Services Editorial -->
-<section class="px-6 md:px-20 bg-brand-charcoal text-white" style="background: radial-gradient(circle at 50% 30%, #252525 0%, #1a1a1a 70%); padding-top: 100px; padding-bottom: 96px;" id="servicios">
-<div class="max-w-7xl mx-auto">
-<!-- Bloque 1: Imagen Izquierda -->
-<div class="flex flex-col md:flex-row gap-20 items-center" style="margin-bottom: 150px;">
-<div class="w-full md:w-1/2 overflow-hidden rounded-[80px]">
-<img alt="Modelado de glúteos" class="w-full h-[450px] object-cover hover:scale-105 transition-transform duration-700" src="imagenes/plasmagel.png"/>
-</div>
-<div class="w-full md:w-1/2">
-<h2  class="text-brand-fucsia service-subtitle"> PLASMA GEL Y MODELADO DE GLÚTEOS</span></h2>
-<p class="text-lg mb-8">
-            La alternativa más segura y natural para proyectar y dar volumen a tus glúteos. Al ser un relleno creado a partir de tu propia sangre, garantizamos un resultado armonioso y seguro.
-          </p>
-<ul class="mb-10 text-sm uppercase tracking-widest font-semibold">
-<li class="flex items-center gap-5 mb-3"><span class="w-5 h-[1px] bg-brand-fucsia"></span> 100% Biocompatible</li>
-<li class="flex items-center gap-5 mb-3"><span class="w-5 h-[1px] bg-brand-fucsia"></span> Resultado Armonioso</li>
-<li class="flex items-center gap-5 mb-3"><span class="w-5 h-[1px] bg-brand-fucsia"></span> Volumen Natural</li>
-</ul>
-<a class="inline-block py-4 px-8 service-cta border-brand-fucsia font-bold tracking-widest hover:text-brand-fucsia transition-colors" href="https://wa.me/51999999999?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20Modelado%20de%20gl%C3%BAteos%20con%20Plasma%20Gel">AGENDAR CITA</a>
-</div>
-</div>
+        <!-- About Section -->
+        <section class="about" id="nosotros">
+            <div class="container about-container">
+                <div class="about-images">
+                    <img src="img\plasmarico.png" alt="Tratamiento Facial MilySpa" class="about-img-1">
+                    <img src="img\plasmagel.png" alt="Masaje Relajante" class="about-img-2">
+                </div>
+                <div class="about-content">
+                    <span class="section-subtitle">¿Quiénes Somos?</span>
+                    <h2 class="section-title">Un Santuario para tu Cuerpo y Mente</h2>
+                    <p class="section-text">
+                        En MilySpa nos especializamos en tratamientos estéticos y cuidado de la piel, combinando
+                        técnicas innovadoras con productos de la más alta calidad para brindarte resultados visibles y
+                        una experiencia de bienestar única.
+                    </p>
+                    <p class="section-text">
+                        Nuestro equipo de profesionales altamente capacitados, con más de 3 años de experiencia en
+                        estética y belleza, está comprometido en ofrecerte un servicio personalizado, seguro y enfocado
+                        en resaltar tu belleza natural.
+                    </p>
+                    <ul class="about-features">
+                        <li><i class="fas fa-check-circle"></i> Especialistas Certificados</li>
+                        <li><i class="fas fa-check-circle"></i> Insumos con registro sanitario</li>
+                        <li><i class="fas fa-check-circle"></i> Ambiente higienizado</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-<!-- Bloque 2: Imagen Derecha -->
-<div class="flex flex-col md:flex-row-reverse gap-20 items-center" style="margin-bottom: 150px;">
-<div class="w-full md:w-1/2 overflow-hidden rounded-[80px]">
-<img alt="Escultura y firmeza" class="w-full h-[450px] object-cover hover:scale-105 transition-transform duration-700" src="imagenes/peptonas.png"/>
-</div>
-<div class="w-full md:w-1/2">
-<h2 class="text-brand-fucsia service-subtitle">PEPTONAS Y LEVANTAMIENTO INTENSIVO</span></h2>
-<p class="text-lg mb-8">
-            Nutrición celular de alta absorción diseñada para tonificar y aumentar la masa muscular. Ideal para combatir la flacidez en glúteos y piernas con efecto push-up.
-          </p>
-<ul class="mb-10 text-sm uppercase tracking-widest font-semibold">
-<li class="flex items-center gap-5 mb-3"><span class="w-5 h-[1px] bg-brand-fucsia"></span> Tonificación Muscular</li>
-<li class="flex items-center gap-5 mb-3"><span class="w-5 h-[1px] bg-brand-fucsia"></span> Efecto Push-Up</li>
-<li class="flex items-center gap-5 mb-3"><span class="w-5 h-[1px] bg-brand-fucsia"></span> Alta Absorción</li>
-</ul>
-<a class="inline-block py-4 px-8 service-cta border-brand-fucsia font-bold tracking-widest hover:text-brand-fucsia transition-colors" href="https://wa.me/51999999999?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20Peptonas%20para%20Escultura%20y%20firmeza">AGENDAR CITA</a>
-</div>
-</div>
+        <!-- Services Section -->
+        <section class="services" id="servicios">
+            <div class="container">
+                <div class="section-header center">
+                    <span class="section-subtitle">Lo Nuestro</span>
+                    <h2 class="section-title">Tratamientos Especializados</h2>
+                    <p class="section-description">Cuidamos de ti con una amplia gama de opciones diseñadas para realzar
+                        tu belleza y brindarte armonía.</p>
+                </div>
 
-<!-- Bloque 3: Imagen Izquierda -->
-<div class="flex flex-col md:flex-row gap-20 items-center" style="margin-bottom: 150px;">
-<div class="w-full md:w-1/2 overflow-hidden rounded-[80px]">
-<img alt="Terapia de perfección cutánea" class="w-full h-[450px] object-cover hover:scale-105 transition-transform duration-700" src="imagenes/limpieza.png"/>
-</div>
-<div class="w-full md:w-1/2">
-<h2 class="text-brand-fucsia service-subtitle">LIMPIEZA Y CUIDADO FACIAL PROFUNDO</span></h2>
-<p class="text-lg mb-8">
-            Un protocolo de renovación integral que va más allá de lo estético. Diseñamos una experiencia a medida para desintoxicar y equilibrar tu rostro con activos de alta gama.
-          </p>
-<ul class="mb-10 text-sm uppercase tracking-widest font-semibold">
-<li class="flex items-center gap-5 mb-3"><span class="w-5 h-[1px] bg-brand-fucsia"></span> Renovación Integral</li>
-<li class="flex items-center gap-5 mb-3"><span class="w-5 h-[1px] bg-brand-fucsia"></span> Activos Premium</li>
-<li class="flex items-center gap-5 mb-3"><span class="w-5 h-[1px] bg-brand-fucsia"></span> Protocolo Personalizado</li>
-</ul>
-<a class="inline-block py-4 px-8 service-cta border-brand-fucsia font-bold tracking-widest hover:text-brand-fucsia transition-colors" href="https://wa.me/51999999999?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20Terapia%20de%20perfecci%C3%B3n%20cut%C3%A1nea">AGENDAR CITA</a>
-</div>
-</div>
+                <div class="services-grid">
+                    <div class="service-card glass">
+                        <div class="service-icon">
+                            <i class="fas fa-syringe"></i>
+                        </div>
+                        <h3>Plasma Gel y Modelado de Glúteos</h3>
+                        <p>Tratamiento estético avanzado para mejorar volumen, firmeza y contorno de forma natural.</p>
+                        <a href="#contacto" class="service-link">Reserva tu cita <i class="fas fa-arrow-right"></i></a>
+                    </div>
 
-<!-- Bloque 4: Imagen Derecha -->
-<div class="flex flex-col md:flex-row-reverse gap-20 items-center">
-<div class="w-full md:w-1/2 overflow-hidden rounded-[80px]">
-<img alt="Bio-Estimulación Celular" class="w-full h-[450px] object-cover hover:scale-105 transition-transform duration-700" src="imagenes/plasmarico.png"/>
-</div>
-<div class="w-full md:w-1/2">
-<h2 class="text-brand-fucsia service-subtitle">PLASMA RICO EN PLAQUETAS</span></h2>
-<p class="text-lg mb-8">
-            El estándar de oro en medicina regenerativa. Utilizamos tus propios factores de crecimiento para despertar la producción de colágeno y reparar la piel desde el interior.
-          </p>
-<ul class="mb-10 text-sm uppercase tracking-widest font-semibold">
-<li class="flex items-center gap-5 mb-3"><span class="w-5 h-[1px] bg-brand-fucsia"></span> Medicina Regenerativa</li>
-<li class="flex items-center gap-5 mb-3"><span class="w-5 h-[1px] bg-brand-fucsia"></span> Producción de Colágeno</li>
-<li class="flex items-center gap-5 mb-3"><span class="w-5 h-[1px] bg-brand-fucsia"></span> Reparación Celular</li>
-</ul>
-<a class="inline-block py-4 px-8 service-cta border-brand-fucsia font-bold tracking-widest hover:text-brand-fucsia transition-colors" href="https://wa.me/51999999999?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20Bio-Estimulaci%C3%B3n%20Celular%20con%20PRP">AGENDAR CITA</a>
-</div>
-</div>
-</div>
-</section>
-<!-- END: Services Editorial -->
-<!-- BEGIN: 4 Pilares de Seguridad -->
-<section class="py-24 px-6 md:px-20" style="background-color: #1a1a1a;">
-<div class="max-w-7xl mx-auto">
-<div class="bg-brand-charcoal/50 p-12 md:p-24 rounded-[60px] border border-white/10 relative overflow-hidden">
-<div class="relative z-10">
-<div class="text-center mb-20">
-<h2 class="text-5xl md:text-6xl mb-6 text-white">Pilares de <span class="italic">Seguridad</span></h2>
-<p class="text-gray-400 max-w-2xl mx-auto text-lg">Comprometidos con los más altos estándares para que tu única preocupación sea disfrutar de tu transformación.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-<!-- Pilar 1 -->
-<div class="group">
-<span class="block text-brand-fucsia mb-6 text-sm font-bold tracking-widest uppercase">01</span>
-<h3 class="text-2xl mb-4 font-semibold leading-tight text-white">Materiales 100% Descartables</h3>
-<div class="w-10 h-[1px] bg-white/20 mb-6 group-hover:w-full transition-all duration-500"></div>
-<p class="text-gray-400 text-sm leading-relaxed">Garantizamos tu salud utilizando insumos nuevos y desechables en cada procedimiento.</p>
-</div>
-<!-- Pilar 2 -->
-<div class="group">
-<span class="block text-brand-fucsia mb-6 text-sm font-bold tracking-widest uppercase">02</span>
-<h3 class="text-2xl mb-4 font-semibold leading-tight text-white">Especialistas Certificadas</h3>
-<div class="w-10 h-[1px] bg-white/20 mb-6 group-hover:w-full transition-all duration-500"></div>
-<p class="text-gray-400 text-sm leading-relaxed">Tu cuerpo en manos de expertas con más de 3 años de trayectoria en medicina estética.</p>
-</div>
-<!-- Pilar 3 -->
-<div class="group">
-<span class="block text-brand-fucsia mb-6 text-sm font-bold tracking-widest uppercase">03</span>
-<h3 class="text-2xl mb-4 font-semibold leading-tight text-white">Insumos con Registro Sanitario</h3>
-<div class="w-10 h-[1px] bg-white/20 mb-6 group-hover:w-full transition-all duration-500"></div>
-<p class="text-gray-400 text-sm leading-relaxed">Solo utilizamos productos autorizados que garantizan resultados seguros y naturales.</p>
-</div>
-<!-- Pilar 4 -->
-<div class="group">
-<span class="block text-brand-fucsia mb-6 text-sm font-bold tracking-widest uppercase">04</span>
-<h3 class="text-2xl mb-4 font-semibold leading-tight text-white">Ambiente Higienizado</h3>
-<div class="w-10 h-[1px] bg-white/20 mb-6 group-hover:w-full transition-all duration-500"></div>
-<p class="text-gray-400 text-sm leading-relaxed">Protocolos estrictos de limpieza en nuestro studio de San Juan de Miraflores.</p>
-</div>
-</div>
-</div>
-<!-- Subtle Trust Seal Decorative Element -->
-<div class="absolute -bottom-20 -right-20 w-80 h-80 bg-brand-fucsia/5 rounded-full blur-3xl"></div>
-<div class="absolute -top-20 -left-20 w-80 h-80 bg-brand-fucsia/5 rounded-full blur-3xl"></div>
-</div>
-</div>
-</section>
-<!-- END: 4 Pilares de Seguridad -->
-<!-- BEGIN: Testimonials -->
-<section class="py-24 relative" style="background-color: #252525;">
-<div class="max-w-4xl mx-auto px-6">
-<!-- Título de la sección -->
-<div class="text-center mb-16">
-<h2 class="text-5xl md:text-6xl text-white mb-4" style="font-family: 'Playfair Display', serif;">Clientas que <span class="italic">confiaron en nosotras</span></h2>
-</div>
-<!-- Slider Container -->
-<div class="overflow-hidden relative">
-<div id="testimonialSlider" class="flex transition-transform duration-700 ease-in-out">
-<!-- Testimonial 1 -->
-<div class="min-w-full text-center px-4">
-<div class="mb-12">
-</div>
-<h2 class="text-3xl md:text-4xl italic font-serif leading-relaxed mb-10 text-white">
-"Vine por una limpieza facial y terminé amando mi tratamiento de Plasma Gel. Mily es una profesional increíble que realmente escucha lo que buscas. ¡Mi piel nunca se vio mejor!"
-</h2>
-<p class="font-bold tracking-widest uppercase text-sm text-gray-300">— Andrea R., San Juan de Miraflores</p>
-</div>
+                    <div class="service-card glass">
+                        <div class="service-icon">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        <h3>Peptonas y Levantamiento Intensivo</h3>
+                        <p>Nutrición celular especializada para reafirmar, tonificar y levantar tu figura.</p>
+                        <a href="#contacto" class="service-link">Reserva tu cita <i class="fas fa-arrow-right"></i></a>
+                    </div>
 
-<!-- Testimonial 2 -->
-<div class="min-w-full text-center px-4">
-<div class="mb-12">
-<span class="text-brand-fucsia text-4xl leading-none">"</span>
-</div>
-<h2 class="text-3xl md:text-4xl italic font-serif leading-relaxed mb-10 text-white">
-"Buscaba un cambio natural y el Modelado de Glúteos con Plasma Gel superó mis expectativas. En Mily Spa Studio te hacen sentir cómoda desde que entras; se nota la dedicación y el detalle en cada procedimiento. ¡Salí renovada y feliz!"
-</h2>
-<p class="font-bold tracking-widest uppercase text-sm text-gray-300">— Luciana M., Chorrillos</p>
-</div>
+                    <div class="service-card glass">
+                        <div class="service-icon">
+                            <i class="fas fa-spa"></i>
+                        </div>
+                        <h3>Limpieza y Cuidado Facial Profundo</h3>
+                        <p>Renueva tu piel eliminando impurezas para revelar un rostro luminoso y saludable.</p>
+                        <a href="#contacto" class="service-link">Reserva tu cita <i class="fas fa-arrow-right"></i></a>
+                    </div>
 
-<!-- Testimonial 3 -->
-<div class="min-w-full text-center px-4">
-<div class="mb-12">
-<span class="text-brand-fucsia text-4xl leading-none">"</span>
-</div>
-<h2 class="text-3xl md:text-4xl italic font-serif leading-relaxed mb-10 text-white">
-"Tenía muchas dudas sobre qué tratamiento elegir, pero Mily me asesoró con mucha paciencia. Me hice el Plasma Gel y los resultados son súper armoniosos. Es difícil encontrar un lugar tan profesional y seguro cerca de casa. ¡Totalmente recomendado!"
-</h2>
-<p class="font-bold tracking-widest uppercase text-sm text-gray-300">— Camila S., Villa María del Triunfo</p>
-</div>
+                    <div class="service-card glass">
+                        <div class="service-icon">
+                            <i class="fas fa-droplet"></i>
+                        </div>
+                        <h3>Plasma Rico en Plaquetas</h3>
+                        <p>Rejuvenecimiento integral utilizando los factores de crecimiento de tu propio plasma (PRP).
+                        </p>
+                        <a href="#contacto" class="service-link">Reserva tu cita <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<!-- Testimonial 4 -->
-<div class="min-w-full text-center px-4">
-<div class="mb-12">
-<span class="text-brand-fucsia text-4xl leading-none">"</span>
-</div>
-<h2 class="text-3xl md:text-4xl italic font-serif leading-relaxed mb-10 text-white">
-"Increíble la atención y los resultados. Vine por una recomendación para mejorar mi figura y el tratamiento de Plasma Gel fue la mejor decisión. Mily es una experta que cuida cada detalle para que el resultado sea perfecto. ¡Me siento más segura que nunca!"
-</h2>
-<p class="font-bold tracking-widest uppercase text-sm text-gray-300">— Valeria T., Villa El Salvador</p>
-</div>
-</div>
+        <!-- Testimonials Section -->
+        <section class="testimonials" id="testimonios">
+            <div class="container">
+                <div class="section-header center">
+                    <span class="section-subtitle">Experiencias</span>
+                    <h2 class="section-title">Lo que dicen nuestras clientas</h2>
+                </div>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p>"Buscaba un cambio natural y el Modelado de Glúteos con Plasma Gel superó mis expectativas.
+                            En MilySpa, se nota la dedicación. Salí renovada y feliz!"</p>
+                        <h4>- Sofía M., Villa El Salvador</h4>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p>"Me hice un tratamiento facial y mi piel quedó increíble, súper luminosa. Recomiendo MilySpa
+                            al 100%."</p>
+                        <h4>- Andrea P., San Juan de Miraflores</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<!-- Navigation Arrows -->
-<button onclick="moveTestimonial(-1)" class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white w-12 h-12 rounded-full flex items-center justify-center transition-all shadow-lg z-10">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-</svg>
-</button>
-<button onclick="moveTestimonial(1)" class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white w-12 h-12 rounded-full flex items-center justify-center transition-all shadow-lg z-10">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-</svg>
-</button>
-</div>
+        <!-- CTA Section -->
+        <section class="cta" id="contacto">
+            <div class="container cta-container glass-dark">
+                <div class="cta-content">
+                    <h2>¿Lista para consentirte?</h2>
+                    <p>Reserva tu cita hoy mismo en MilySpa y disfruta de nuestros tratamientos diseñados para mejorar
+                        la salud de tu piel.</p>
+                </div>
+                <div class="cta-action">
+                    <a href="https://api.whatsapp.com/send?phone=51977728546&text=Hola%2C%20deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios.%20"
+                        target="_blank" class="btn btn-primary btn-large cta-btn">
+                        <i class="fab fa-whatsapp"></i> Reservar por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
 
-<!-- Indicators -->
-<div class="mt-16 flex justify-center gap-4" id="testimonialIndicators">
-<button onclick="goToTestimonial(0)" class="w-3 h-3 rounded-full bg-white transition-all"></button>
-<button onclick="goToTestimonial(1)" class="w-3 h-3 rounded-full bg-white/20 transition-all"></button>
-<button onclick="goToTestimonial(2)" class="w-3 h-3 rounded-full bg-white/20 transition-all"></button>
-<button onclick="goToTestimonial(3)" class="w-3 h-3 rounded-full bg-white/20 transition-all"></button>
-</div>
-</div>
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="#" class="logo">Mily<span>Spa</span></a>
+                <p>Tu refugio de belleza y relajación en la ciudad. Descubre el bienestar auténtico.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/MILYSPAOFICIAL/#" aria-label="Facebook"><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/milyspa1/?hl=es" aria-label="Instagram"><i
+                            class="fab fa-instagram"></i></a>
 
-<script>
-let currentTestimonial = 0;
-const totalTestimonials = 4;
+                </div>
+            </div>
 
-function updateTestimonialSlider() {
-const slider = document.getElementById('testimonialSlider');
-const indicators = document.querySelectorAll('#testimonialIndicators button');
+            <div class="footer-links">
+                <h3>Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#testimonios">Testimonios</a></li>
+                </ul>
+            </div>
 
-slider.style.transform = `translateX(-${currentTestimonial * 100}%)`;
+            <div class="footer-contact">
+                <h3>Contacto</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Pacifico 1. San Juan De Miraflores, San Juan de
+                        Miraflores, Peru, lima</li>
 
-indicators.forEach((indicator, index) => {
-if (index === currentTestimonial) {
-indicator.classList.remove('bg-white/20');
-indicator.classList.add('bg-white');
-} else {
-indicator.classList.remove('bg-white');
-indicator.classList.add('bg-white/20');
-}
-});
-}
+                    <li><i class="fas fa-clock"></i> Lun - Sáb: 10:00 AM - 8:00 PM</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 MilySpa. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
-function moveTestimonial(direction) {
-currentTestimonial += direction;
-if (currentTestimonial < 0) currentTestimonial = totalTestimonials - 1;
-if (currentTestimonial >= totalTestimonials) currentTestimonial = 0;
-updateTestimonialSlider();
-}
-
-function goToTestimonial(index) {
-currentTestimonial = index;
-updateTestimonialSlider();
-}
-
-// Auto-slide every 5 seconds
-setInterval(() => {
-moveTestimonial(1);
-}, 5000);
-</script>
-</section>
-<!-- END: Testimonials -->
-<!-- BEGIN: FAQ Section -->
-<section class="py-24 px-6 md:px-20" style="background-color: #1a1a1a;">
-<div class="max-w-3xl mx-auto">
-<div class="text-center mb-16">
-<h2 class="text-5xl mb-4 text-white">Preguntas <span class="italic">Frecuentes</span></h2>
-<p class="text-gray-400">Despeja tus dudas y siéntete segura antes de empezar.</p>
-</div>
-<div class="space-y-12">
-<!-- FAQ Item 1 -->
-<div class="border-b border-white/10 pb-8">
-<h3 class="text-2xl md:text-3xl mb-4 font-serif text-white">¿Los resultados son inmediatos?</h3>
-<p class="text-gray-400 leading-relaxed font-sans">
-          En la mayoría de nuestros tratamientos, como el Plasma Gel, notarás un cambio visible al instante. Sin embargo, los mejores resultados se aprecian a los pocos días, cuando el cuerpo termina de procesar y absorber los nutrientes aplicados.
-        </p>
-</div>
-<!-- FAQ Item 2 -->
-<div class="border-b border-white/10 pb-8">
-<h3 class="text-2xl md:text-3xl mb-4 font-serif text-white">¿Requieren tiempo de recuperación?</h3>
-<p class="text-gray-400 leading-relaxed font-sans">
-          Nuestros procedimientos son mínimamente invasivos. Puedes retomar tus actividades diarias casi de inmediato, siguiendo recomendaciones sencillas como evitar la exposición solar directa y el ejercicio intenso durante las primeras 24 horas.
-        </p>
-</div>
-<!-- FAQ Item 3 -->
-<div class="border-b border-white/10 pb-8">
-<h3 class="text-2xl md:text-3xl mb-4 font-serif text-white">¿Es doloroso el tratamiento?</h3>
-<p class="text-gray-400 leading-relaxed font-sans">
-          La comodidad de nuestras pacientes es prioridad. Utilizamos técnicas delicadas y, de ser necesario, anestesia tópica local para asegurar que la experiencia sea relajante y libre de molestias significativas.
-        </p>
-</div>
-<!-- FAQ Item 4 -->
-<div class="pb-8">
-<h3 class="text-2xl md:text-3xl mb-4 font-serif text-white">¿Cuántas sesiones necesito?</h3>
-<p class="text-gray-400 leading-relaxed font-sans">
-          Cada cuerpo es único. Realizamos una evaluación personalizada gratuita para diseñar un plan que se ajuste a tus objetivos específicos, garantizando resultados armoniosos y duraderos.
-        </p>
-</div>
-</div>
-<div class="mt-12 text-center">
-<span class="inline-block py-1 px-3 bg-brand-fucsia/10 text-brand-fucsia text-xs font-bold uppercase tracking-widest rounded">Asesoría Gratuita</span>
-</div>
-</div>
-</section>
-<!-- END: FAQ Section -->
-<!-- BEGIN: Contact & Form -->
-<section class="py-24 px-6 md:px-20" style="background-color: #252525;" id="contacto">
-<div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-20">
-<div class="w-full md:w-1/2">
-<h2 class="text-6xl mb-12 text-white">Hablemos de tu <span class="italic">Próximo Cambio</span></h2>
-<div class="space-y-8">
-<div>
-<p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">Dirección</p>
-<p class="text-xl text-white"> Pacifico 1. San Juan De Miraflores, San Juan de Miraflores, Peru, lima </p>
-</div>
-<div>
-<p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">Horarios</p>
-<p class="text-xl text-white">Lun - Sáb: 10:00 AM - 8:00 PM</p>
-</div>
-<div>
-<p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">Social</p>
-<div class="flex gap-6 mt-2">
-<a class="hover:text-brand-fucsia transition-colors font-bold uppercase text-xs tracking-widest text-white" href="#">Instagram</a>
-<a class="hover:text-brand-fucsia transition-colors font-bold uppercase text-xs tracking-widest text-white" href="#">Facebook</a>
-<a class="hover:text-brand-fucsia transition-colors font-bold uppercase text-xs tracking-widest text-white" href="#">TikTok</a>
-</div>
-</div>
-</div>
-</div>
-<div class="w-full md:w-1/2 bg-brand-charcoal p-10 md:p-16 rounded-huge text-white">
-<form class="space-y-6">
-<div data-purpose="form-group">
-<label class="block text-xs uppercase tracking-widest font-bold mb-2 opacity-50">Nombre Completo</label>
-<input class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-3 focus:ring-0 focus:border-brand-fucsia transition-colors" placeholder="Escribe aquí..." type="text"/>
-</div>
-<div data-purpose="form-group">
-<label class="block text-xs uppercase tracking-widest font-bold mb-2 opacity-50">Tratamiento de interés</label>
-<select class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-3 focus:ring-0 focus:border-brand-fucsia transition-colors">
-<option class="bg-brand-charcoal">Plasma Gel</option>
-<option class="bg-brand-charcoal">Peptonas</option>
-<option class="bg-brand-charcoal">Limpieza Facial</option>
-<option class="bg-brand-charcoal">Otros</option>
-</select>
-</div>
-<div data-purpose="form-group">
-<label class="block text-xs uppercase tracking-widest font-bold mb-2 opacity-50">Mensaje (Opcional)</label>
-<textarea class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-3 focus:ring-0 focus:border-brand-fucsia transition-colors" placeholder="¿Deseas contarnos algo más?" rows="3"></textarea>
-</div>
-<button class="w-full py-5 bg-brand-fucsia text-white rounded-huge font-bold uppercase tracking-widest hover:brightness-110 transition-all mt-10" type="submit">
-            SOLICITAR CITA
-          </button>
-</form>
-</div>
-</div>
-</section>
-<!-- END: Contact & Form -->
-<!-- BEGIN: Footer -->
-<footer class="bg-brand-charcoal text-white pt-20 pb-10 px-6 border-t border-white/5">
-<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
-<div class="text-4xl font-bold tracking-tighter">MILY SPA</div>
-<div class="text-center md:text-right">
-<p class="text-gray-400 text-sm mb-2">© 2024 MILY SPA STUDIO. Todos los derechos reservados.</p>
-<p class="text-xs uppercase tracking-widest opacity-30">Diseño para Lima Sur • Especialistas en Medicina Estética</p>
-</div>
-</div>
-</footer>
-<!-- END: Footer -->
+    <script src="script.js"></script>
 </body>
+
 </html>
