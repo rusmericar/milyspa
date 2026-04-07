@@ -261,7 +261,7 @@ ul {
 /* --- Hero Section --- */
 .hero {
     position: relative;
-    padding-top: 8rem;
+    padding-top: 5.5rem;
     /* header offset */
     min-height: 100vh;
     display: flex;
@@ -1130,6 +1130,92 @@ ul {
 
     .nav-btn {
         display: none;
+    }
+
+    /* Reducir padding de secciones en móvil */
+    .about,
+    .services,
+    .testimonials {
+        padding: 3.5rem 0;
+    }
+
+    /* Hero: reducir offset superior */
+    .hero {
+        padding-top: 5.5rem;
+        min-height: auto;
+    }
+
+    /* About images: reducir alto en tablets */
+    .about-images {
+        height: 300px;
+    }
+
+    /* Quitar restricción cuadrada en tarjetas de servicio */
+    .service-card {
+        aspect-ratio: auto;
+    }
+
+    /* Footer: colapsar columnas en 1 */
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- Breakpoint teléfonos (≤ 480px) --- */
+@media (max-width: 480px) {
+    /* Hero más compacto */
+    .hero {
+        padding-top: 4.5rem;
+    }
+
+    /* Ocultar badges flotantes que desbordan en pantallas pequeñas */
+    .floating-badge {
+        display: none;
+    }
+
+    /* Secciones más compactas */
+    .about,
+    .services,
+    .testimonials {
+        padding: 3rem 0;
+    }
+
+    /* About images más pequeño */
+    .about-images {
+        height: 240px;
+    }
+
+    /* Título principal */
+    .title {
+        font-size: clamp(1.9rem, 8vw, 2.8rem);
+    }
+
+    /* Descripción de sección */
+    .section-description {
+        font-size: 1rem;
+    }
+
+    /* Tarjetas testimonial más compactas */
+    .testimonial-card {
+        padding: 1.75rem 1.25rem;
+    }
+
+    .testimonial-card p {
+        font-size: 1rem;
+    }
+
+    /* Footer ajustes */
+    .footer {
+        padding: 2.5rem 0 1.25rem;
+    }
+
+    .footer-container {
+        gap: 1.5rem;
+    }
+
+    /* Botones CTA */
+    .cta {
+        padding: 2.5rem 0;
     }
 }
 
