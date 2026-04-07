@@ -128,24 +128,30 @@
         /* --- Botón cerrar --- */
         .madre-close {
             position: absolute;
-            top: 0.75rem;
-            right: 0.85rem;
-            background: rgba(255,255,255,0.22);
+            top: 0.8rem;
+            right: 0.9rem;
+            background: rgba(255,255,255,0.55);
             border: none;
-            color: #fff;
-            width: 28px;
-            height: 28px;
+            color: #c0306a;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 1.25rem;
+            font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.2s, transform 0.2s;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
             line-height: 1;
-            z-index: 3;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.18);
         }
-        .madre-close:hover { background: rgba(255,255,255,0.4); transform: scale(1.1); }
+        .madre-close:hover {
+            background: #fff;
+            transform: scale(1.12);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.22);
+        }
 
         /* --- Etiqueta tipo Temu --- */
         .madre-label {
@@ -305,18 +311,45 @@
         }
         .madre-skip:hover { color: rgba(255,255,255,0.78); }
 
-        /* --- Responsive para celulares --- */
+        /* --- Responsive para celulares (Mobile-First / anti-penalización Google) --- */
         @media (max-width: 480px) {
-            /* Popup: altura máxima y scroll interno en pantallas cortas */
+            /*
+             * Scale 0.85: el popup NO tapa el 100% de la pantalla.
+             * Google interpreta que hay contenido de fondo visible → evita penalización
+             * por "Intrusive Interstitials".
+             */
             #madre-popup {
                 width: calc(100vw - 1.25rem);
-                max-height: 90dvh;
-                max-height: 90vh; /* fallback para browsers sin dvh */
+                /* Escala ligeramente el popup para mostrar contexto de fondo */
+                transform: translate(-50%, -50%) scale(0.85);
+                /* Overflow-y interno si el contenido es largo */
+                max-height: 80dvh;
+                max-height: 80vh; /* fallback navegadores sin dvh */
                 overflow-y: auto;
                 -webkit-overflow-scrolling: touch;
                 scrollbar-width: none;
             }
+            /* Animar desde scale(0) hasta scale(0.85) en móvil */
+            @keyframes madreSpringMobile {
+                0%   { transform: translate(-50%, -50%) scale(0) rotate(-4deg); opacity: 0; }
+                50%  { transform: translate(-50%, -50%) scale(0.96) rotate(1deg); opacity: 1; }
+                70%  { transform: translate(-50%, -50%) scale(0.81) rotate(-0.5deg); opacity: 1; }
+                85%  { transform: translate(-50%, -50%) scale(0.88) rotate(0deg); opacity: 1; }
+                100% { transform: translate(-50%, -50%) scale(0.85) rotate(0deg); opacity: 1; }
+            }
+            #madre-popup.open {
+                animation: madreSpringMobile 0.7s cubic-bezier(0.22, 1.4, 0.36, 1) forwards;
+            }
             #madre-popup::-webkit-scrollbar { display: none; }
+
+            /* Área táctil X: mínimo 44×44px (Google UX guidelines) */
+            .madre-close {
+                width: 44px;
+                height: 44px;
+                font-size: 1.4rem;
+                top: 0.65rem;
+                right: 0.65rem;
+            }
 
             .madre-card {
                 padding: 1.9rem 1.35rem 1.5rem;
@@ -398,7 +431,7 @@
                 <div class="hero-image">
                     <div class="image-wrapper glass">
                         <!-- High quality image representing the aesthetic -->
-                        <img src="img\descarga (22).jpg" alt="Ambiente MilySpa Tratamiento Relajante">
+                        <img src="img\hero-ambiente-milyspa.jpg" alt="Ambiente MilySpa Tratamiento Relajante">
                     </div>
                     <div class="floating-badge badge-1 glass">
                         <i class="fas fa-star"></i>
@@ -424,8 +457,8 @@
         <section class="about" id="nosotros">
             <div class="container about-container">
                 <div class="about-images">
-                    <img src="img\plasmarico.png" alt="Tratamiento Facial MilySpa" class="about-img-1">
-                    <img src="img\plasmagel.png" alt="Masaje Relajante" class="about-img-2">
+                    <img src="img\tratamiento-plasma-rico.png" alt="Tratamiento Facial MilySpa" class="about-img-1">
+                    <img src="img\modelado-gluteos-plasma.png" alt="Masaje Relajante" class="about-img-2">
                 </div>
                 <div class="about-content">
                     <span class="section-subtitle">¿Quiénes Somos?</span>
@@ -663,31 +696,76 @@
     <script>
         (function () {
             var STORAGE_KEY = 'madre2026_closed';
+
+            /* sessionStorage: si ya se cerró en esta sesión, no mostrar nunca más */
             if (sessionStorage.getItem(STORAGE_KEY)) return;
 
-            var slidein  = document.getElementById('madre-popup');
+            var popup    = document.getElementById('madre-popup');
             var overlay  = document.getElementById('madre-overlay');
             var closeBtn = document.getElementById('madre-close-btn');
             var skipBtn  = document.getElementById('madre-skip-btn');
 
             function openModal() {
-                slidein.classList.add('open');
+                popup.classList.add('open');
                 overlay.classList.add('visible');
-                slidein.removeAttribute('aria-hidden');
+                popup.removeAttribute('aria-hidden');
             }
 
             function closeModal() {
-                slidein.classList.remove('open');
+                popup.classList.remove('open');
                 overlay.classList.remove('visible');
-                slidein.setAttribute('aria-hidden', 'true');
+                popup.setAttribute('aria-hidden', 'true');
+                /* Guardar en sessionStorage: no vuelve a aparecer en toda la sesión */
                 sessionStorage.setItem(STORAGE_KEY, '1');
             }
 
-            setTimeout(openModal, 3500);
+            /*
+             * Trigger al 70% de scroll — detectado cuando la sección #testimonios
+             * entra en el viewport (IntersectionObserver + fallback de scroll ratio).
+             * Funciona igual en desktop y móvil.
+             */
+            var triggered = false;
 
+            function doTrigger() {
+                if (triggered) return;
+                triggered = true;
+                setTimeout(openModal, 1000);
+            }
+
+            var testimoniosSec = document.getElementById('testimonios');
+
+            if (testimoniosSec && 'IntersectionObserver' in window) {
+                /* Método preciso: dispara cuando testimonios es al menos 10% visible */
+                var observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            observer.disconnect();
+                            doTrigger();
+                        }
+                    });
+                }, { threshold: 0.1 });
+                observer.observe(testimoniosSec);
+            } else {
+                /* Fallback: scroll al 70% del documento */
+                function checkScroll() {
+                    if (triggered) return;
+                    var scrolled = window.scrollY + window.innerHeight;
+                    var total    = document.documentElement.scrollHeight;
+                    if (scrolled / total >= 0.70) {
+                        window.removeEventListener('scroll', checkScroll);
+                        doTrigger();
+                    }
+                }
+                window.addEventListener('scroll', checkScroll, { passive: true });
+            }
+
+            /* Cerrar con X, con "No gracias" o tocando el overlay oscuro */
             closeBtn.addEventListener('click', closeModal);
-            skipBtn.addEventListener('click', closeModal);
-            overlay.addEventListener('click', closeModal);
+            skipBtn.addEventListener('click',  closeModal);
+            overlay.addEventListener('click',  function (e) {
+                /* Solo cerrar si el tap fue directamente en el overlay, no en el popup */
+                if (e.target === overlay) closeModal();
+            });
         })();
     </script>
 
