@@ -10,34 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 2. Parallax Effect on Hero
-    const heroSection = document.querySelector('.hero');
-    const heroContent = document.querySelector('.hero-content');
-    const heroImage = document.querySelector('.hero-image');
-
-    let ticking = false;
-
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                const scrolled = window.pageYOffset;
-                const parallaxSpeed = 0.5;
-
-                if (heroSection && scrolled < window.innerHeight) {
-                    if (heroContent) {
-                        heroContent.style.transform = `translateY(${scrolled * parallaxSpeed * 0.3}px)`;
-                        heroContent.style.opacity = Math.max(0.2, 1 - (scrolled / window.innerHeight) * 0.8);
-                    }
-                    if (heroImage) {
-                        const scale = Math.max(0.95, 1 - scrolled / window.innerHeight * 0.05);
-                        heroImage.style.transform = `translateY(${scrolled * parallaxSpeed * 0.5}px) scale(${scale})`;
-                    }
-                }
-                ticking = false;
-            });
-            ticking = true;
-        }
-    });
 
     // 3. Mobile Menu Toggle
     const menuToggle = document.getElementById('menu-toggle');
@@ -71,23 +43,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-link');
 
+    let navTicking = false;
     window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (scrollY >= (sectionTop - sectionHeight / 3)) {
-                current = section.getAttribute('id');
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').includes(current)) {
-                link.classList.add('active');
-            }
-        });
-    });
+        if (!navTicking) {
+            window.requestAnimationFrame(() => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollY >= (sectionTop - sectionHeight / 3)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+                navTicking = false;
+            });
+            navTicking = true;
+        }
+    }, { passive: true });
 
     // 5. Enhanced Scroll Reveal Animations
     const observerOptions = {
