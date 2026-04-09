@@ -134,7 +134,7 @@ ul {
     font-weight: 500;
     font-size: 1rem;
     cursor: pointer;
-    transition: var(--transition);
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
     border: none;
     gap: 0.5rem;
 }
@@ -194,7 +194,7 @@ ul {
     left: 0;
     width: 100%;
     z-index: 1000;
-    transition: var(--transition);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
     padding: 1.5rem 0;
 }
 
@@ -236,6 +236,7 @@ ul {
     font-weight: 500;
     color: var(--text-main);
     position: relative;
+    transition: color 0.3s ease;
 }
 
 .nav-link::after {
@@ -246,7 +247,7 @@ ul {
     width: 0;
     height: 2px;
     background-color: var(--primary);
-    transition: var(--transition);
+    transition: width 0.3s ease;
 }
 
 .nav-link:hover::after,
@@ -724,7 +725,7 @@ ul {
 }
 
 .service-link i {
-    transition: var(--transition);
+    transition: transform 0.3s ease;
 }
 
 .service-link:hover i {
@@ -749,7 +750,7 @@ ul {
     border-radius: 20px;
     padding: 2.5rem 2rem;
     text-align: center;
-    transition: var(--transition-smooth);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease, opacity 0.6s cubic-bezier(0.33, 1, 0.68, 1);
     opacity: 0;
     transform: translateY(40px);
     box-shadow: 0 4px 20px rgba(221, 115, 238, 0.08), 0 1px 6px rgba(0,0,0,0.04);
@@ -969,7 +970,7 @@ ul {
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.1);
     color: white;
-    transition: var(--transition);
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .social-links a:hover {
@@ -1005,7 +1006,7 @@ ul {
 
 .footer-links a {
     color: #999999;
-    transition: var(--transition);
+    transition: color 0.3s ease, padding-left 0.3s ease;
 }
 
 .footer-links a:hover {
@@ -1099,7 +1100,7 @@ ul {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        transition: var(--transition);
+        transition: right 0.3s ease;
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
     }
 
@@ -1166,30 +1167,9 @@ ul {
         grid-template-columns: 1fr;
         min-height: unset;
         border-radius: 20px;
-        position: relative;
-        isolation: isolate;
         background:
-            repeating-linear-gradient(
-                124deg,
-                transparent 0px,
-                transparent 38px,
-                rgba(242, 169, 249, 0.32) 38px,
-                rgba(242, 169, 249, 0.32) 39px,
-                transparent 39px,
-                transparent 82px,
-                rgba(242, 169, 249, 0.22) 82px,
-                rgba(242, 169, 249, 0.22) 83px
-            ),
-            repeating-linear-gradient(
-                47deg,
-                transparent 0px,
-                transparent 60px,
-                rgba(242, 169, 249, 0.18) 60px,
-                rgba(242, 169, 249, 0.18) 61px,
-                transparent 61px,
-                transparent 110px
-            ),
             linear-gradient(160deg, #fdf8fe 0%, #faeefe 50%, #fdf5fe 100%);
+        border-image: none;
         border: 1px solid #E2B4D8;
         box-shadow: 0 8px 32px rgba(221, 115, 238, 0.22), 0 2px 10px rgba(221, 115, 238, 0.12);
     }
@@ -1447,18 +1427,28 @@ ul {
 }
 
 /* --- Performance Optimizations --- */
-.hero-content,
-.hero-image,
-.service-card,
-.testimonial-card,
-.about-images,
-.cta-container {
-    will-change: auto;
-}
-
-.hero-content:hover,
-.hero-image:hover,
 .service-card:hover,
 .testimonial-card:hover {
-    will-change: transform, opacity;
+    will-change: transform;
+}
+
+/* Disable expensive animations and backdrop-filter on mobile */
+@media (max-width: 768px) {
+    .header.scrolled {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background-color: rgba(254, 254, 254, 0.97);
+    }
+    .btn-outline {
+        animation: none;
+    }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }

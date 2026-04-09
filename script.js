@@ -13,6 +13,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 
 
+    // Clean up will-change after hero animations complete to free GPU memory
+    const heroContent = document.querySelector('.hero-content');
+    const heroImage   = document.querySelector('.hero-image');
+    if (heroContent) {
+        heroContent.addEventListener('animationend', () => {
+            heroContent.style.willChange = 'auto';
+        }, { once: true });
+    }
+    if (heroImage) {
+        heroImage.addEventListener('animationend', () => {
+            heroImage.style.willChange = 'auto';
+        }, { once: true });
+    }
+
     // 3. Mobile Menu Toggle
     const menuToggle = document.getElementById('menu-toggle');
     const navMenu = document.getElementById('nav-menu');
@@ -45,17 +59,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-link');
 
+    // Cache section positions once — read offsetTop outside scroll handler to avoid forced reflow
+    let sectionCache = [];
+    function buildSectionCache() {
+        sectionCache = Array.from(sections).map(s => ({
+            id: s.getAttribute('id'),
+            top: s.offsetTop,
+            height: s.offsetHeight
+        }));
+    }
+    buildSectionCache();
+    window.addEventListener('resize', buildSectionCache, { passive: true });
+
     let navTicking = false;
     window.addEventListener('scroll', () => {
         if (!navTicking) {
             window.requestAnimationFrame(() => {
+                const scrollY = window.scrollY;
                 let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (scrollY >= (sectionTop - sectionHeight / 3)) {
-                        current = section.getAttribute('id');
-                    }
+                sectionCache.forEach(({ id, top, height }) => {
+                    if (scrollY >= top - height / 3) current = id;
                 });
                 navLinks.forEach(link => {
                     link.classList.remove('active');
@@ -80,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate-in');
-                // Don't unobserve to allow re-triggering if needed
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
