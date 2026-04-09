@@ -1,14 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Sticky Header
     const header = document.getElementById('header');
-
+    let headerTicking = false;
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+        if (!headerTicking) {
+            window.requestAnimationFrame(() => {
+                header.classList.toggle('scrolled', window.scrollY > 50);
+                headerTicking = false;
+            });
+            headerTicking = true;
         }
-    });
+    }, { passive: true });
 
 
     // 3. Mobile Menu Toggle

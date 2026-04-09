@@ -14,6 +14,9 @@
     <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
     <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
     
+    <!-- Preload LCP image -->
+    <link rel="preload" as="image" href="img/hero-ambiente-milyspa.jpg" fetchpriority="high">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-R5RX2D87QV"></script>
     <script>
@@ -107,6 +110,7 @@
             background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,0.12) 50%, transparent 75%);
             background-size: 200% 100%;
             animation: madreShimmer 2.6s linear infinite;
+            animation-play-state: paused;
             pointer-events: none;
             z-index: 1;
         }
@@ -224,6 +228,7 @@
             width: 100%;
             box-sizing: border-box;
             animation: madrePulse 1.8s ease-in-out infinite;
+            animation-play-state: paused;
             transition: transform 0.15s, background 0.2s;
             margin-bottom: 1.45rem;
             position: relative;
@@ -236,6 +241,12 @@
             background: linear-gradient(90deg, transparent, rgba(192,48,106,0.08), transparent);
             background-size: 200% 100%;
             animation: madreShimmer 1.8s linear infinite;
+            animation-play-state: paused;
+        }
+        #madre-popup.open .madre-card::before,
+        #madre-popup.open .madre-cta-fb,
+        #madre-popup.open .madre-cta-fb::after {
+            animation-play-state: running;
         }
         .madre-cta-fb:hover { transform: scale(1.03); background: #ffe8f0; }
         .madre-cta-fb i { font-size: 1rem; }
@@ -433,7 +444,7 @@
                 <div class="hero-image">
                     <div class="image-wrapper glass">
                         <!-- High quality image representing the aesthetic -->
-                        <img src="img\hero-ambiente-milyspa.jpg" alt="Ambiente MilySpa Tratamiento Relajante">
+                        <img src="img/hero-ambiente-milyspa.jpg" alt="Ambiente MilySpa Tratamiento Relajante" fetchpriority="high">
                     </div>
                     <div class="floating-badge badge-1 glass">
                         <i class="fas fa-star"></i>
@@ -459,8 +470,8 @@
         <section class="about" id="nosotros">
             <div class="container about-container">
                 <div class="about-images">
-                    <img src="img\tratamiento-plasma-rico.png" alt="Tratamiento Facial MilySpa" class="about-img-1">
-                    <img src="img\modelado-gluteos-plasma.png" alt="Masaje Relajante" class="about-img-2">
+                    <img src="img/tratamiento-plasma-rico.jpg" alt="Tratamiento Facial MilySpa" class="about-img-1" loading="lazy">
+                    <img src="img/modelado-gluteos-plasma.jpg" alt="Masaje Relajante" class="about-img-2" loading="lazy">
                 </div>
                 <div class="about-content">
                     <span class="section-subtitle">¿Quiénes Somos?</span>
@@ -586,21 +597,18 @@
         <!-- CTA Section -->
         <section class="cta" id="contacto">
             <div class="container">
-                <div class="cta-container glass-dark reveal">
+                <div class="cta-container reveal">
                     <div class="cta-content">
-                        <h2>
-                            <strong>Resultados <span class="italic-serif">visibles</span> desde la primera sesi&oacute;n</strong>
-                        </h2>
-                        <p>Somos especialistas en tratamientos est&eacute;ticos faciales y corporales. Combinamos experiencia profesional con tecnolog&iacute;a avanzada para ofrecerte soluciones efectivas, seguras y no invasivas.<br>Tu belleza, potenciada por expertas.</p>
-                        <p>&iquest;Lista para vivir la experiencia MilySpa?</p>
-                        
+                        <span class="section-subtitle">Reserva tu cita</span>
+                        <h2>¿Lista para potenciar tu belleza con nuestras expertas?</h2>
+                        <p class="cta-subheading">Agenda tu primera sesión y obtendrás asesoría personalizada y descuentos exclusivos.</p>
                         <a href="https://api.whatsapp.com/send?phone=51977728546&text=Hola%2C%20quiero%20agendar%20mi%20primera%20sesi%C3%B3n%20en%20MilySpa."
                             target="_blank" rel="noopener noreferrer" class="cta-btn-pro">
-                            <i class="fab fa-whatsapp"></i> Agenda tu primera sesi&oacute;n hoy
+                            <i class="fab fa-whatsapp"></i> ¡Quiero agendar mi cita!
                         </a>
                     </div>
                     <div class="cta-image">
-                        <img src="img/Separa%20tu%20cita%20en%20milyspa.webp" alt="Separa tu cita en MilySpa" loading="lazy">
+                        <img src="img/cosmetologamily.webp" alt="Cosmetóloga MilySpa" loading="lazy">
                     </div>
                 </div>
             </div>
