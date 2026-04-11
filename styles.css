@@ -1328,7 +1328,7 @@ ul {
 
     /* Título principal: tamaño y márgen inferior cómodo */
     .title {
-        font-size: clamp(1.75rem, 7.5vw, 2.4rem);
+        font-size: clamp(1.9rem, 8vw, 2.55rem);
         line-height: 1.2;
         margin-bottom: 1rem;
     }
