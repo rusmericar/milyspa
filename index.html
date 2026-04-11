@@ -72,6 +72,7 @@
             display: none;
         }
         #madre-overlay.visible {
+            display: block;
             background: rgba(0, 0, 0, 0.6);
             pointer-events: all;
         }
@@ -85,7 +86,7 @@
             width: min(360px, calc(100vw - 2rem));
             background: #e8718a;
             border-radius: 22px;
-            overflow: hidden;
+            overflow: visible;
             box-shadow: 0 30px 80px rgba(176,32,96,0.35);
             z-index: 501;
             opacity: 0;
@@ -93,6 +94,8 @@
             text-align: center;
             display: none;
             pointer-events: none;
+            max-height: 90vh;
+            overflow-y: auto;
         }
         #madre-popup.open {
             animation: madreSpring 0.7s cubic-bezier(0.22, 1.4, 0.36, 1) forwards;
@@ -104,8 +107,8 @@
         .madre-card {
             background: linear-gradient(160deg, #f2849a 0%, #e8718a 45%, #d45c75 100%);
             position: relative;
-            padding: 2.4rem 2rem 2rem;
-            overflow: hidden;
+            padding: 3.5rem 2rem 1.6rem;
+            overflow: visible;
         }
         /* Shimmer Temu por encima de las flores */
         .madre-card::before {
@@ -138,9 +141,11 @@
 
         /* --- Botón cerrar --- */
         .madre-close {
-            position: absolute;
-            top: 0.8rem;
-            right: 0.9rem;
+            position: fixed;
+            top: auto;
+            right: auto;
+            margin-top: -1rem;
+            margin-right: -1rem;
             background: rgba(255,255,255,0.55);
             border: none;
             color: #c0306a;
@@ -155,7 +160,7 @@
             justify-content: center;
             transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
             line-height: 1;
-            z-index: 10;
+            z-index: 20;
             box-shadow: 0 2px 10px rgba(0,0,0,0.18);
         }
         .madre-close:hover {
@@ -183,10 +188,10 @@
         .madre-card h2 {
             font-family: 'Playfair Display', serif;
             color: #fff;
-            font-size: 1.75rem;
+            font-size: 1.72rem;
             font-weight: 700;
             line-height: 1.2;
-            margin: 0 0 1.1rem;
+            margin: 0 0 0.85rem;
             text-shadow: 0 2px 10px rgba(0,0,0,0.18);
         }
 
@@ -195,8 +200,8 @@
             background: rgba(255,255,255,0.18);
             border: 1px solid rgba(255,255,255,0.38);
             border-radius: 14px;
-            padding: 0.85rem 1.1rem;
-            margin-bottom: 1.25rem;
+            padding: 0.7rem 1rem;
+            margin-bottom: 0.9rem;
         }
         .madre-prize p {
             margin: 0;
@@ -214,7 +219,7 @@
         .madre-participate {
             color: rgba(255,255,255,0.9);
             font-size: 0.9rem;
-            margin: 0 0 1rem;
+            margin: 0 0 0.75rem;
         }
 
         /* --- Botón CTA con pulso blanco (estilo Temu) --- */
@@ -235,7 +240,7 @@
             animation: madrePulse 1.8s ease-in-out infinite;
             animation-play-state: paused;
             transition: transform 0.15s, background 0.2s;
-            margin-bottom: 1.45rem;
+            margin-bottom: 0.9rem;
             position: relative;
             overflow: hidden;
         }
@@ -261,7 +266,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            margin-bottom: 0.9rem;
+            margin-bottom: 0.6rem;
             color: rgba(255,255,255,0.55);
             font-size: 0.73rem;
             letter-spacing: 0.5px;
@@ -278,7 +283,7 @@
             color: rgba(255,255,255,0.92);
             font-size: 0.85rem;
             line-height: 1.55;
-            margin: 0 0 0.85rem;
+            margin: 0 0 0.6rem;
         }
 
         /* --- Iconos de redes sociales --- */
@@ -286,7 +291,7 @@
             display: flex;
             justify-content: center;
             gap: 1rem;
-            margin-bottom: 1.2rem;
+            margin-bottom: 0.8rem;
         }
         .madre-social-icons a {
             display: flex;
@@ -310,7 +315,7 @@
             color: rgba(255,255,255,0.95);
             font-size: 14.5px;
             line-height: 1.5;
-            margin: 0 0 0.75rem;
+            margin: 0 0 0.5rem;
         }
         .madre-footer-text strong { color: #fff; font-weight: 700; }
 
@@ -365,16 +370,17 @@
                 width: 44px;
                 height: 44px;
                 font-size: 1.4rem;
-                top: 0.65rem;
-                right: 0.65rem;
+                top: 0.5rem;
+                right: 0.5rem;
             }
 
             .madre-card {
-                padding: 1.9rem 1.35rem 1.5rem;
+                padding: 3.5rem 1.35rem 1.35rem;
             }
 
             .madre-card h2 {
-                font-size: 1.45rem;
+                font-size: 1.6rem;
+                margin-top: 1rem;
                 margin-bottom: 0.85rem;
             }
 
@@ -710,8 +716,7 @@
                 </g>
             </svg>
 
-            <span class="madre-label">Sorteo especial </span>
-            <h2 id="madre-titulo">¡Celebra a mamá<br>con MilySpa!</h2>
+            <h2 id="madre-titulo">¡Sorteo por el día de la madre!</h2>
             <div class="madre-prize">
                 <p>Gana una de nuestras<br><strong>3 limpiezas faciales profundas</strong></p>
             </div>
@@ -719,8 +724,7 @@
             <a href="https://www.facebook.com/share/r/18B414eYwk/" target="_blank" rel="noopener noreferrer" class="madre-cta-fb">
                 <i class="fab fa-facebook-f"></i> Ver publicación en FB
             </a>
-            <div class="madre-sep">🎁</div>
-            <p class="madre-social-label">Y no te olvides de seguirnos<br>en nuestras redes</p>
+            <p class="madre-social-label">Síguenos en redes</p>
             <div class="madre-social-icons">
                 <a href="https://www.facebook.com/MILYSPAOFICIAL/" target="_blank" rel="noopener noreferrer" class="fb-icon" aria-label="Facebook">
                     <i class="fab fa-facebook-f"></i>
@@ -729,7 +733,7 @@
                     <i class="fab fa-instagram"></i>
                 </a>
             </div>
-            <p class="madre-footer-text">No pierdas esta oportunidad de engreír a mamá</p>
+            <p class="madre-footer-text">No dejes pasar esta oportunidad.</p>
             <a href="https://www.facebook.com/share/r/18B414eYwk/" target="_blank" rel="noopener noreferrer" class="madre-label" style="font-size:0.90rem; text-decoration:none;">¡Participa ya!</a>
             <button class="madre-skip" id="madre-skip-btn">No, gracias</button>
         </div>
