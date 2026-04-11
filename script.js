@@ -117,6 +117,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate-in');
                 observer.unobserve(entry.target);
+
+                // Once the entry animation finishes, clear it so hover transitions work
+                if (entry.target.classList.contains('cta-container')) {
+                    entry.target.addEventListener('animationend', () => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'none';
+                        entry.target.style.animation = 'none';
+                    }, { once: true });
+                }
             }
         });
     }, observerOptions);

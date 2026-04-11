@@ -80,7 +80,7 @@
         /* --- Tarjeta principal (fondo rosa uniforme, como el bosquejo) --- */
         #madre-popup {
             position: fixed;
-            top: 50%;
+            top: calc(50% + 40px);
             left: 50%;
             transform: translate(-50%, -50%) scale(0);
             width: min(360px, calc(100vw - 2rem));
@@ -140,12 +140,10 @@
         }
 
         /* --- Botón cerrar --- */
-        .madre-close {
-            position: fixed;
-            top: auto;
-            right: auto;
-            margin-top: -1rem;
-            margin-right: -1rem;
+        .madre-card > .madre-close {
+            position: absolute;
+            top: 12px;
+            left: 12px;
             background: rgba(255,255,255,0.55);
             border: none;
             color: #c0306a;
@@ -163,7 +161,7 @@
             z-index: 20;
             box-shadow: 0 2px 10px rgba(0,0,0,0.18);
         }
-        .madre-close:hover {
+        .madre-card > .madre-close:hover {
             background: #fff;
             transform: scale(1.12);
             box-shadow: 0 4px 14px rgba(0,0,0,0.22);
@@ -342,6 +340,7 @@
              * por "Intrusive Interstitials".
              */
             #madre-popup {
+                top: 50%;
                 width: calc(100vw - 1.25rem);
                 /* Escala ligeramente el popup para mostrar contexto de fondo */
                 transform: translate(-50%, -50%) scale(0.85);
@@ -366,12 +365,12 @@
             #madre-popup::-webkit-scrollbar { display: none; }
 
             /* Área táctil X: mínimo 44×44px (Google UX guidelines) */
-            .madre-close {
+            .madre-card > .madre-close {
                 width: 44px;
                 height: 44px;
                 font-size: 1.4rem;
-                top: 0.5rem;
-                right: 0.5rem;
+                top: 12px;
+                left: 12px;
             }
 
             .madre-card {
@@ -609,8 +608,8 @@
         <section class="cta" id="contacto">
             <div class="container">
                 <div class="cta-container reveal">
-                    <div class="cta-content">
-                        <span class="section-subtitle">Reserva tu cita</span>
+                    <div class="cta-content glass-dark">
+                        <span class="section-subtitle"><i class="fas fa-star"></i> Reserva tu cita</span>
                         <h2>¿Lista para potenciar tu belleza con nuestras expertas?</h2>
                         <p class="cta-subheading">Agenda tu primera sesión y obtendrás asesoría personalizada y descuentos exclusivos.</p>
                         <a href="https://api.whatsapp.com/send?phone=51977728546&text=Hola%2C%20quiero%20agendar%20mi%20primera%20sesi%C3%B3n%20en%20MilySpa."
@@ -619,7 +618,7 @@
                         </a>
                     </div>
                     <div class="cta-image">
-                        <img src="img/cosmetologamily.webp" alt="Cosmetóloga MilySpa" loading="lazy">
+                        <img src="img/expertasmily.webp" alt="Cosmetóloga MilySpa" loading="lazy">
                     </div>
                 </div>
             </div>
